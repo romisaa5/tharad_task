@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tharad/core/theme/app_colors/light_app_colors.dart';
 import 'package:tharad/core/theme/app_texts/app_text_styles.dart';
 
-class AppInput extends StatelessWidget {
+class AppInput extends StatefulWidget {
   final EdgeInsetsGeometry? contentPadding;
   final InputBorder? focusedBorder;
   final InputBorder? enabledBorder;
@@ -50,13 +50,26 @@ class AppInput extends StatelessWidget {
   });
 
   @override
+  State<AppInput> createState() => _AppInputState();
+}
+
+class _AppInputState extends State<AppInput> {
+  late bool _isObscure;
+
+  @override
+  void initState() {
+    super.initState();
+    _isObscure = widget.isObscureText ?? false;
+  }
+
+  @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
 
-    InputBorder border = isUnderline
+    InputBorder border = widget.isUnderline
         ? UnderlineInputBorder(
             borderSide: BorderSide(
-              color: isBorder
+              color: widget.isBorder
                   ? LightAppColors.grey600.withValues(alpha: .4)
                   : Colors.transparent,
               width: 1.w,
@@ -65,13 +78,13 @@ class AppInput extends StatelessWidget {
         : OutlineInputBorder(
             borderRadius: BorderRadius.circular(8.r),
             borderSide: BorderSide(
-              color: isBorder ? Color(0xffF0E6DE) : Colors.transparent,
+              color: widget.isBorder ? Color(0xffF0E6DE) : Colors.transparent,
               width: 1.w,
             ),
           );
 
     return FormField<String>(
-      validator: validator,
+      validator: widget.validator,
       builder: (FormFieldState<String> state) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -82,35 +95,35 @@ class AppInput extends StatelessWidget {
               },
               onTapOutside: (_) =>
                   FocusManager.instance.primaryFocus?.unfocus(),
-              keyboardType: keyboardType,
-              textAlign: textAlign ?? TextAlign.start,
-              maxLines: maxLines ?? 1,
-              controller: controller,
+              keyboardType: widget.keyboardType,
+              textAlign: widget.textAlign ?? TextAlign.start,
+              maxLines: widget.maxLines ?? 1,
+              controller: widget.controller,
               onChanged: (value) {
                 state.didChange(value);
-                onChanged?.call(value);
+                widget.onChanged?.call(value);
               },
-              focusNode: focusNode,
-              obscureText: isObscureText ?? false,
+              focusNode: widget.focusNode,
+              obscureText: _isObscure,
               cursorColor: LightAppColors.primary700,
               decoration: InputDecoration(
                 isDense: true,
                 contentPadding:
-                    contentPadding ??
+                    widget.contentPadding ??
                     EdgeInsets.symmetric(horizontal: 12.w, vertical: 16.h),
                 focusedBorder:
-                    focusedBorder ??
+                    widget.focusedBorder ??
                     border.copyWith(
                       borderSide: BorderSide(
-                        color: isBorder
+                        color: widget.isBorder
                             ? Color(0xffF0E6DE)
                             : Colors.transparent,
                         width: 1.5.w,
                       ),
                     ),
-                enabledBorder: enabledBorder ?? border,
+                enabledBorder: widget.enabledBorder ?? border,
                 errorBorder:
-                    errorBorder ??
+                    widget.errorBorder ??
                     border.copyWith(
                       borderSide: BorderSide(
                         color: colorScheme.error,
@@ -118,7 +131,7 @@ class AppInput extends StatelessWidget {
                       ),
                     ),
                 focusedErrorBorder:
-                    errorBorder ??
+                    widget.errorBorder ??
                     border.copyWith(
                       borderSide: BorderSide(
                         color: colorScheme.error,
@@ -126,19 +139,31 @@ class AppInput extends StatelessWidget {
                       ),
                     ),
 
-                hintText: hintText,
+                hintText: widget.hintText,
                 hintStyle:
-                    hintStyle ??
+                    widget.hintStyle ??
                     AppTextStyles.font14Regular.copyWith(
                       color: LightAppColors.grey500,
                     ),
-                suffixIcon: suffixIcon,
-                prefixIcon: prefixIcon,
-                fillColor: backgroundColor ?? LightAppColors.primary50,
+                suffixIcon: widget.isObscureText == true
+                    ? IconButton(
+                        icon: Icon(
+                          _isObscure ? Icons.visibility_off : Icons.visibility,
+                          color: LightAppColors.grey500,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _isObscure = !_isObscure;
+                          });
+                        },
+                      )
+                    : widget.suffixIcon,
+                prefixIcon: widget.prefixIcon,
+                fillColor: widget.backgroundColor ?? LightAppColors.primary50,
                 filled: true,
               ),
               style:
-                  inputTextStyle ??
+                  widget.inputTextStyle ??
                   AppTextStyles.font16Regular.copyWith(
                     color: colorScheme.secondary,
                   ),

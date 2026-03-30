@@ -58,39 +58,9 @@ class _RegisterViewState extends State<RegisterView> {
               keyboardType: TextInputType.emailAddress,
             ),
             CustomLabelText(text: 'كلمة المرور'),
-            AppInput(
-              hintText: 'أدخل كلمة المرور',
-              isObscureText: true,
-              suffixIcon: IconButton(
-                onPressed: () {
-                  setState(() {
-                    isObscurePassword = !isObscurePassword;
-                  });
-                },
-                icon: Icon(
-                  isObscurePassword ? Icons.visibility_off : Icons.visibility,
-                  color: LightAppColors.grey600,
-                ),
-              ),
-            ),
+            AppInput(hintText: 'أدخل كلمة المرور', isObscureText: true),
             CustomLabelText(text: 'تأكيد كلمة المرور'),
-            AppInput(
-              hintText: 'أدخل تأكيد كلمة المرور',
-              isObscureText: true,
-              suffixIcon: IconButton(
-                onPressed: () {
-                  setState(() {
-                    isObscureConfirmPassword = !isObscureConfirmPassword;
-                  });
-                },
-                icon: Icon(
-                  isObscureConfirmPassword
-                      ? Icons.visibility_off
-                      : Icons.visibility,
-                  color: LightAppColors.grey600,
-                ),
-              ),
-            ),
+            AppInput(hintText: 'أدخل تأكيد كلمة المرور', isObscureText: true),
             40.h.ph,
             AppButton(text: 'إنشاء حساب جديد', onTap: () {}),
             12.h.ph,

@@ -54,21 +54,7 @@ class _LoginViewState extends State<LoginView> {
               keyboardType: TextInputType.emailAddress,
             ),
             CustomLabelText(text: 'كلمة المرور'),
-            AppInput(
-              hintText: 'أدخل كلمة المرور',
-              isObscureText: true,
-              suffixIcon: IconButton(
-                onPressed: () {
-                  setState(() {
-                    isObscurePassword = !isObscurePassword;
-                  });
-                },
-                icon: Icon(
-                  isObscurePassword ? Icons.visibility_off : Icons.visibility,
-                  color: LightAppColors.grey600,
-                ),
-              ),
-            ),
+            AppInput(hintText: 'أدخل كلمة المرور', isObscureText: true),
 
             10.h.ph,
             CupertinoButton(
