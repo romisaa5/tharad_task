@@ -106,7 +106,7 @@ class _RegisterViewState extends State<RegisterView> {
                 4.w.pw,
                 GestureDetector(
                   onTap: () {
-                    AppNavigator.push(context, LoginView());
+                    AppNavigator.push(LoginView());
                   },
                   child: Text(
                     'تسجيل الدخول',

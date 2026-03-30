@@ -77,6 +77,11 @@ class AppInput extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextFormField(
+              onFieldSubmitted: (_) {
+                FocusScope.of(context).unfocus();
+              },
+              onTapOutside: (_) =>
+                  FocusManager.instance.primaryFocus?.unfocus(),
               keyboardType: keyboardType,
               textAlign: textAlign ?? TextAlign.start,
               maxLines: maxLines ?? 1,

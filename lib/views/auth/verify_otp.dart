@@ -1,9 +1,11 @@
 import 'package:tharad/core/common/widgets/app_button.dart';
 import 'package:tharad/core/common/widgets/app_images.dart';
+import 'package:tharad/core/helpers/app_navigator.dart';
 import 'package:tharad/core/helpers/extensions.dart';
 import 'package:tharad/core/theme/app_colors/light_app_colors.dart';
 import 'package:tharad/core/theme/app_texts/app_text_styles.dart';
 import 'package:tharad/core/utils/common_imports.dart';
+import 'package:tharad/views/auth/login.dart';
 import 'package:tharad/views/auth/widgets/otp_field.dart';
 
 class VerifyOtp extends StatefulWidget {
@@ -55,7 +57,12 @@ class _VerifyOtpState extends State<VerifyOtp> {
             40.h.ph,
             OtpField(onCompleted: (val) {}),
             40.h.ph,
-            AppButton(text: 'المتابعة', onTap: () {}),
+            AppButton(
+              text: 'المتابعة',
+              onTap: () {
+                AppNavigator.pushAndRemoveUntil(LoginView());
+              },
+            ),
           ],
         ),
       ),

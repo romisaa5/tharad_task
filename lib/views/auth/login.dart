@@ -73,7 +73,7 @@ class _LoginViewState extends State<LoginView> {
             10.h.ph,
             CupertinoButton(
               padding: EdgeInsets.zero,
-              onPressed: () => AppNavigator.push(context, ForgetPasswordView()),
+              onPressed: () => AppNavigator.push(ForgetPasswordView()),
               child: Align(
                 alignment: Alignment.centerRight,
                 child: Text(
@@ -88,7 +88,7 @@ class _LoginViewState extends State<LoginView> {
             AppButton(
               text: 'تسجيل الدخول',
               onTap: () {
-                AppNavigator.pushAndRemoveUntil(context, ProfileView());
+                AppNavigator.pushAndRemoveUntil(ProfileView());
               },
             ),
             12.h.ph,
@@ -104,7 +104,7 @@ class _LoginViewState extends State<LoginView> {
                 4.w.pw,
                 GestureDetector(
                   onTap: () {
-                    AppNavigator.push(context, RegisterView());
+                    AppNavigator.push(RegisterView());
                   },
                   child: Text(
                     'إنشاء حساب جديد',

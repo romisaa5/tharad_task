@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tharad/core/helpers/app_navigator.dart';
 import 'package:tharad/core/theme/app_colors/light_theme_data.dart';
 import 'package:tharad/views/auth/register.dart';
 
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (_, child) {
         return MaterialApp(
+          navigatorKey: AppNavigator.navigatorKey,
           builder: (context, child) =>
               Directionality(textDirection: TextDirection.rtl, child: child!),
           home: const RegisterView(),
